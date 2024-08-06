@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/connectDB.js";
 import userRoutes from "./routes/user.routes.js";
+import messageRoutes from "./routes/message.routes.js";
 const app = express();
 
 app.use(cors());
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 // Routes
 
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/messages", messageRoutes);
 
 const PORT = process.env.PORT || 5000;
 connectDB();
