@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function RegisterPage() {
   const [user, setUser] = useState({
@@ -10,9 +12,24 @@ function RegisterPage() {
     confirmPassword: "",
     gender: "",
   });
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/users/register",
+        user
+      );
+      if (response && response.data.success) {
+        toast.success(response.data && response.data.message);
+        navigate("/login");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
     setUser({
       fullname: "",
       username: "",

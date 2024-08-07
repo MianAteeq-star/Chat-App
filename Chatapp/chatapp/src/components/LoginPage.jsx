@@ -1,15 +1,42 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setAuthUser } from "../redux/userSlice";
 
 function LoginPage() {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user);
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/users/login",
+        user
+      );
+      console.log(response);
+      if (response && response.data.success) {
+        console.log(response.data);
+
+        //   // localStorage.setItem("token", response.data.token);
+        //   // localStorage.setItem("user", JSON.stringify(response.data.user));
+        navigate("/");
+        console.log(response.data);
+        dispatch(setAuthUser(response.data));
+        console.log(response.data);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
     setUser({
       email: "",
       password: "",
@@ -32,8 +59,8 @@ function LoginPage() {
                   type="email"
                   value={user.email}
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
-                  placeholder="email"
-                  className="input input-bordered w-full mb-3  rounded-lg text-gray-200 placeholder-gray-200 border-gray-200  bg-transparent focus:outline-none focus:ring-transparent focus:border-gray-200 focus:placeholder-transparent focus:text-gray-200"
+                  placeholder="Email"
+                  className="input h-10 input-bordered w-full  rounded-lg text-gray-200 placeholder-gray-200 border-gray-200  bg-transparent focus:outline-none focus:ring-transparent focus:border-gray-200 focus:placeholder-transparent focus:text-gray-200"
                   required
                 />
               </div>
