@@ -2,11 +2,26 @@ import React from "react";
 import { VscSearch } from "react-icons/vsc";
 import OtherUsers from "./OtherUsers";
 import { CiLogout } from "react-icons/ci";
+import { toast } from "react-hot-toast";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      const res = await axios.get("http://localhost:4000/api/v1/users/logout");
+      console.log(res.data);
+      toast.success(res.data.message);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.res.data.message);
+    }
+  };
   return (
     <>
-      <div className=" border-r border-slate-500 flex flex-col overflow-auto cursor-pointer  ">
+      <div className=" border-r border-slate-500 flex flex-col overflow-auto cursor-pointer p-2 ">
         <form className=" flex items-center gap-2 sticky top-0 z-30 bg-slate-500 p-2 rounded-md">
           <input
             type="text"
@@ -25,7 +40,7 @@ function Sidebar() {
           <OtherUsers />
         </div>
         <div className="divider  px-3"></div>
-        <div className="fixed bottom-1 left-1 z-30">
+        <div onClick={handleLogout} className="fixed bottom-1 left-1 z-30">
           <button className="btn bg-red-500 hover:bg-red-600 border-cyan-500">
             <CiLogout className="h-4  w-4 text-white" />
             Logout

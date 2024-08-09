@@ -40,11 +40,11 @@ function LoginPage() {
   };
   return (
     <>
-      <div className="hero  min-h-screen">
-        <div className="hero-content flex-col  w-full ">
-          <div>
+      <div className="hero bg-base-200 h-screen  flex justify-center items-center ">
+        <div className="hero-content h-96 flex-col flex justify-center items-center w-full m-4">
+          <div className="card   bg-red-200 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 w-full max-w-sm shadow-2xl text-center">
             <div className="text-center ">
-              <h1 className="text-5xl font-bold text-slate-200">Login Now</h1>
+              <h1 className="text-3xl font-bold text-slate-200">Login Now</h1>
             </div>
             <form className="card-body" onSubmit={handleSubmit}>
               <div className="form-control">
