@@ -14,16 +14,12 @@ function LoginPage() {
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
     try {
       const response = await axios.post(
         "http://localhost:4000/api/v1/users/login",
         user
       );
-      console.log(response);
       if (response && response.data.success) {
-        console.log(response.data);
-
         //   // localStorage.setItem("token", response.data.token);
         //   // localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/");
@@ -46,7 +42,7 @@ function LoginPage() {
     <>
       <div className="hero  min-h-screen">
         <div className="hero-content flex-col  w-full ">
-          <div className="card h-full w-full bg-red-200 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 max-w-sm shrink-0 shadow-2xl">
+          <div>
             <div className="text-center ">
               <h1 className="text-5xl font-bold text-slate-200">Login Now</h1>
             </div>

@@ -8,3 +8,50 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+.avatar.online:before {
+  content: "";
+  position: absolute;
+  z-index: 10;
+  display: block;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(20, 243, 20);
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: var(--fallback-b1, oklch(var(--b1) / 1));
+  width: 15%;
+  height: 15%;
+  top: 7%;
+  right: 7%;
+}
+.chat-bubble {
+  position: relative;
+  display: block;
+  width: fit-content;
+  padding-left: 1rem /* 16px */;
+  padding-right: 1rem /* 16px */;
+  padding-top: 0.5rem /* 8px */;
+  padding-bottom: 0.5rem /* 8px */;
+  max-width: 90%;
+  border-radius: var(--rounded-box, 1rem /* 16px */);
+  min-height: 2.75rem /* 44px */;
+  min-width: 2.75rem /* 44px */;
+  --tw-bg-opacity: 1;
+  background-color: gray;
+  color: var(--fallback-nc, oklch(var(--nc) / var(--tw-text-opacity)));
+}
