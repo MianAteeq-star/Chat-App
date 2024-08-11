@@ -1,10 +1,11 @@
 import React from "react";
-
+// import MessageContainer from "./MessageContainer";
+// import SendInput from "./SendInput";
 function UserMessage() {
   return (
     <>
-      <div className="p-4 flex-1 overflow-auto w-full ">
-        <div className="chat chat-start">
+      <div className="p-4 flex-1  w-full ">
+        <div className="chat chat-end">
           <div className="chat-image avatar">
             <div className="w-10 rounded-full">
               <img
@@ -16,10 +17,11 @@ function UserMessage() {
           <div className="chat-header">
             <time className="text-xs opacity-50">12:45</time>
           </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
+          <div className="chat-bubble">dfkasdjf</div>
           <div className="chat-footer opacity-50">Delivered</div>
         </div>
-        <div className="chat chat-end">
+        {/* <SendInput /> */}
+        {/* <div className="chat chat-start">
           <div className="chat-image avatar">
             <div className="w-10 rounded-full">
               <img
@@ -33,7 +35,7 @@ function UserMessage() {
           </div>
           <div className="chat-bubble">I hate you!</div>
           <div className="chat-footer opacity-50">Seen at 12:46</div>
-        </div>
+        </div> */}
       </div>
     </>
   );

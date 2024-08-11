@@ -7,7 +7,7 @@ function OtherUsers() {
   // custom hook
   useGetOtherUser();
   const { otherUsers } = useSelector((store) => store.user);
-  console.log(otherUsers);
+  // console.log(otherUsers);
   if (!otherUsers) return; // early return
 
   return (

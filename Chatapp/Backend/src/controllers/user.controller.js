@@ -122,7 +122,8 @@ export const logoutController = async (req, res) => {
 
 export const getOtherUsers = async (req, res) => {
   try {
-    const loggedInUser = req._id;
+    const loggedInUser = req.user._id;
+    console.log(loggedInUser);
     const user = await User.find({ _id: { $ne: loggedInUser } }).select(
       "-password"
     );
