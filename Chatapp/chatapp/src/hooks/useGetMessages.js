@@ -13,14 +13,14 @@ const useGetMessages = () => {
         const res = await axios.get(
           `http://localhost:4000/api/v1/messages/${selectedUser?._id}`
         );
-        console.log(res?.data.conversation?.messages);
-        dispatch(setMessages(res?.data?.conversation?.messages));
+        console.log(res.data);
+        dispatch(setMessages(res?.data));
       } catch (error) {
         console.log(error);
       }
     };
     getMessages();
-  }, [selectedUser]);
+  }, [selectedUser?._id, setMessages]);
 };
 
 export default useGetMessages;

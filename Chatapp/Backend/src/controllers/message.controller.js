@@ -3,7 +3,7 @@ import { Message } from "../models/message.model.js";
 
 export const sendMessages = async (req, res) => {
   try {
-    const senderId = req.user;
+    const senderId = req.id;
     const recieverId = req.params.id;
     const { message } = req.body;
     let conversation = await Conversation.findOne({
@@ -48,17 +48,14 @@ export const sendMessages = async (req, res) => {
 
 export const getMessages = async (req, res) => {
   try {
-    const senderId = req.user;
+    const senderId = req.id;
     const recieverId = req.params.id;
+    console.log(senderId, recieverId)
     const conversation = await Conversation.findOne({
-      participants: { $all: [senderId, recieverId] },
+      participants: {$all: [senderId, recieverId] },
     }).populate("messages");
     console.log(conversation.messages);
-    return res.status(200).json({
-      success: true,
-      message: "Messages fetched successfully",
-      conversation,
-    });
+    return res.status(200).json( conversation?.messages);
   } catch (error) {
     console.log(error);
     res.status(500).json({

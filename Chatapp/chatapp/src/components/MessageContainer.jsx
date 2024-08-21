@@ -11,7 +11,7 @@ const MessageContainer = () => {
     <>
      {
       selectedUser !== null ? (
-        <div className="  md:w-[550px] lg:w-2/3  flex flex-col items-center  overflow-auto">
+        <div className="  md:w-[550px] lg:w-2/3   flex flex-1 flex-col items-center  overflow-auto">
         <div className="flex h-16 w-full p-2 items-center rounded-md hover:bg-zinc-400 shadow-lg   bg-slate-700 px-4 py-2 mb-2">
           <div className="avatar online ">
             <div className="sm:w-14 md:w-16 lg:w-16 rounded-full">
@@ -29,7 +29,7 @@ const MessageContainer = () => {
       </div>
       ) :(
         <div className='md:min-w-[550px] flex flex-col justify-center items-center'>
-        <h1 className='text-4xl text-white font-bold'>Hi,{authUser?.user?.fullName} </h1>
+        <h1 className='text-4xl text-white font-bold'>Hi,{authUser?.user?.fullname} </h1>
         <h1 className='text-2xl text-white'>Let's start conversation</h1>
 
     </div>
