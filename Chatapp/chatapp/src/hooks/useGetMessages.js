@@ -13,8 +13,8 @@ const useGetMessages = () => {
         const res = await axios.get(
           `http://localhost:4000/api/v1/messages/${selectedUser?._id}`
         );
-        console.log(res.data);
-        dispatch(setMessages(res.data));
+        console.log(res?.data.conversation?.messages);
+        dispatch(setMessages(res?.data?.conversation?.messages));
       } catch (error) {
         console.log(error);
       }

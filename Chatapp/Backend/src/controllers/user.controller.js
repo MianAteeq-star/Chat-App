@@ -1,5 +1,5 @@
 import { User } from "../models/user.model.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const registerController = async (req, res) => {
@@ -20,7 +20,7 @@ export const registerController = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ message: "Email already exists" });
+      return res.status(400).json({ message: "Email already exists try different" });
     }
     const hashedPassword = await bcrypt.hash(password, 10); //for hashing password
 
@@ -80,6 +80,7 @@ export const loginController = async (req, res) => {
       .cookie("token", token, {
         maxAge: 1 * 24 * 60 * 60 * 1000,
         httpOnly: true,
+        sameSite : "strict"
       })
       .json({
         success: true,

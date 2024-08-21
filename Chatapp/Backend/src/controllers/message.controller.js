@@ -22,23 +22,23 @@ export const sendMessages = async (req, res) => {
       message,
     });
 
-    if (!newMessage) {
-      return res.status(400).json({ message: "Message not sent" });
-    }
+    // if (!newMessage) {
+    //   return res.status(400).json({ message: "Message not sent" });
+    // }
 
     if (newMessage) {
       conversation.messages.push(newMessage._id);
     }
-    await conversation.save();
+   await conversation.save()
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Message sent",
       newMessage,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: "Error in sendMessages controller",
       error,
@@ -50,7 +50,7 @@ export const getMessages = async (req, res) => {
   try {
     const senderId = req.user;
     const recieverId = req.params.id;
-    let conversation = await Conversation.findOne({
+    const conversation = await Conversation.findOne({
       participants: { $all: [senderId, recieverId] },
     }).populate("messages");
     console.log(conversation.messages);
