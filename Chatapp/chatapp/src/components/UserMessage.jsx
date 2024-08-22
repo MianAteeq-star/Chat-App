@@ -24,7 +24,9 @@ function UserMessage({ msg }) {
             </div>
           </div>
           <div className={`chat-bubble ${msg?.senderId !== authUser?.user._id ? 'bg-gray-200 text-black' : ''} `}>{msg?.message}</div>
-      
+          <div className="chat-footer">
+                <time className="text-xs opacity-50 text-white">{authUser?.user?._id  === msg?.senderId ?  authUser?.user?.username : selectedUser?.username}</time>
+            </div>
         </div>
 
       </div>

@@ -20,8 +20,8 @@ function LoginPage() {
         user
       );
       if (response && response.data.success) {
-        //   // localStorage.setItem("token", response.data.token);
-        //   // localStorage.setItem("user", JSON.stringify(response.data.user));
+          // localStorage.setItem("token", response.data.token);
+          // localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/");
         console.log(response.data);
         dispatch(setAuthUser(response.data));

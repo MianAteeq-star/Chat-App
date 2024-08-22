@@ -5,15 +5,21 @@ import { CiLogout } from "react-icons/ci";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAuthUser } from "../redux/userSlice";
+import { setMessages } from "../redux/messageSlice";
 
 function Sidebar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const handleLogout = async () => {
     try {
       const res = await axios.get("http://localhost:4000/api/v1/users/logout");
       console.log(res.data);
       toast.success(res.data.message);
       navigate("/login");
+      dispatch(setAuthUser(null))
+      dispatch(setMessages(null))
     } catch (error) {
       console.log(error);
       toast.error(error.res.data.message);
@@ -21,8 +27,8 @@ function Sidebar() {
   };
   return (
     <>
-      <div className=" border-r border-slate-500 flex flex-col overflow-auto cursor-pointer p-2 ">
-        <form className=" flex items-center gap-2 sticky top-0 z-30 bg-slate-500 p-2 rounded-md">
+      <div className=" w-4/12 sm:2/12  bg-red-600 border-r border-slate-500 flex flex-col overflow-auto  cursor-pointer p-2 ">
+        <form className=" flex items-center gap-2 sticky top-0 z-30 bg-slate-500 p-2 rounded-md ">
           <input
             type="text"
             placeholder="Search..."

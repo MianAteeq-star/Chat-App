@@ -11,8 +11,8 @@ function Messages() {
 
   return (
     <>
-      <div className="overflow-auto w-full flex-1">
-        {messages?.map((message) => {
+      <div className="overflow-auto  w-full  flex-1">
+        {messages && messages?.map((message) => {
           return <UserMessage key={message._id} msg={message} />;
         })}
       </div>

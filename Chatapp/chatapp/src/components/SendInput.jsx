@@ -34,7 +34,7 @@ const SendInput=()=> {
 
   return (
     <>
-    <form onSubmit={handleInputSubmit} className=" flex items-center gap-2 w-full">
+    <form onSubmit={handleInputSubmit} className=" flex  items-center gap-2 w-full">
       <input
         type="text"
         value={message}
