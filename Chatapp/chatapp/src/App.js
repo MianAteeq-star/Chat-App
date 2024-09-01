@@ -89,25 +89,4 @@ function App() {
 
 export default App;
 
-  // useEffect(()=>{
-  //   if(authUser?.user){
-  //     const socketio = io("*", {
-  //       query:{
-  //         userId:authUser?.user?._id
-  //       }
-  //   });
-  //   dispatch(setSocket(socketio));
-
-  //   socketio?.on('getOnlineUsers', (onlineUsers)=>{
-  //     dispatch(setOnlineUsers(onlineUsers))
-  //   });
-  //   return () => socketio.close();
-  //   }else{
-  //     if(socket){
-  //       socket.close();
-  //       dispatch(setSocket(null));
-  //     }
-  //   }
-
-
-  // },[authUser?.user]);
+ 
