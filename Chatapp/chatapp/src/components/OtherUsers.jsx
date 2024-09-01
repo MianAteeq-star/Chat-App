@@ -13,7 +13,7 @@ function OtherUsers() {
   return (
     <>
       <div className="overflow-auto">
-        {otherUsers?.user.map((user) => {
+        {otherUsers?.map((user) => {
           return <OtherUser key={user._id} user={user} />;
         })}
       </div>

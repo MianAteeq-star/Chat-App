@@ -15,7 +15,7 @@ const SendInput=()=> {
   const handleInputSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post(`http://localhost:4000/api/v1/messages/send/${selectedUser?._id}`, {message}, {
+        const res = await axios.post(`http://localhost:8080/api/v1/messages/send/${selectedUser?._id}`, {message}, {
             headers:{
                 'Content-Type':'application/json'
             },

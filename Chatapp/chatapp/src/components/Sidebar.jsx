@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { VscSearch } from "react-icons/vsc";
 import OtherUsers from "./OtherUsers";
 import { CiLogout } from "react-icons/ci";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setAuthUser } from "../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthUser, setGetOtherUser } from "../redux/userSlice";
 import { setMessages } from "../redux/messageSlice";
-
+ 
 function Sidebar() {
+  const [search , setSearch] = useState("")
+  const {otherUsers} = useSelector(store=>store.user)
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const handleLogout = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/v1/users/logout");
+      const res = await axios.get("http://localhost:8080/api/v1/users/logout");
       console.log(res.data);
       toast.success(res.data.message);
       navigate("/login");
@@ -25,11 +27,26 @@ function Sidebar() {
       toast.error(error.res.data.message);
     }
   };
+
+  const handleSearch = async(e)=>{
+    e.preventDefault()
+    console.log(search)
+    console.log(otherUsers)
+    const searchedUser = otherUsers?.user?.find((user)=> user.fullname.toLowerCase().includes(search.toLowerCase()));
+    console.log(searchedUser)
+    if(searchedUser){
+      dispatch(setGetOtherUser([searchedUser]));
+  }else{
+      toast.error("User not found!");
+  }
+  }
   return (
     <>
-      <div className=" w-4/12 sm:2/12  bg-red-600 border-r border-slate-500 flex flex-col overflow-auto  cursor-pointer p-2 ">
-        <form className=" flex items-center gap-2 sticky top-0 z-30 bg-slate-500 p-2 rounded-md ">
+      <div className=" w-4/12 sm:2/12 border-r border-slate-500 flex flex-col overflow-auto  cursor-pointer p-2 ">
+        <form onSubmit={handleSearch} className=" flex items-center gap-2 sticky top-0 z-30 bg-slate-500 p-2 rounded-md ">
           <input
+          value={search}
+          onChange={(e)=>setSearch(e.target.value)}
             type="text"
             placeholder="Search..."
             className=" input  input-bordered w-full  rounded-md text-gray-200 placeholder-gray-200 border-gray-200  bg-transparent focus:outline-none focus:ring-transparent focus:border-gray-200 focus:placeholder-transparent focus:text-gray-200"

@@ -9,9 +9,9 @@ function useGetOtherUser() {
     const GetOtherUser = async () => {
       try {
         axios.defaults.withCredentials = true;
-        const res = await axios.get("http://localhost:4000/api/v1/users/");
-        console.log(res);
-        dispath(setGetOtherUser(res.data));
+        const res = await axios.get("http://localhost:8080/api/v1/users/");
+        console.log(res.data.user);
+        dispath(setGetOtherUser(res?.data?.user));
       } catch (error) {
         console.error(error);
       }

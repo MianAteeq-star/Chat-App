@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setAuthUser } from "../redux/userSlice";
+import { setAuthUser, setOnlineUsers } from "../redux/userSlice";
 
 function LoginPage() {
   const [user, setUser] = useState({
@@ -12,20 +12,45 @@ function LoginPage() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:4000/api/v1/users/login",
+  //       user
+  //     );
+  //     if (response && response.data.success) {
+  //         // localStorage.setItem("token", response.data.token);
+  //         // localStorage.setItem("user", JSON.stringify(response.data.user));
+  //       navigate("/");
+  //       console.log(response.data);
+  //       dispatch(setAuthUser(response.data));
+  //       console.log(response.data);
+  //     } else {
+  //       toast.error(response.data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error(error.response.data.message);
+  //   }
+  //   setUser({
+  //     email: "",
+  //     password: "",
+  //   });
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/users/login",
+        "http://localhost:8080/api/v1/users/login",
         user
       );
       if (response && response.data.success) {
-          // localStorage.setItem("token", response.data.token);
-          // localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("authUser", JSON.stringify(response.data));
         navigate("/");
-        console.log(response.data);
         dispatch(setAuthUser(response.data));
-        console.log(response.data);
+        // dispatch(setOnlineUsers(response.data));
       } else {
         toast.error(response.data.message);
       }
@@ -38,6 +63,7 @@ function LoginPage() {
       password: "",
     });
   };
+  
   return (
     <>
       <div className="hero bg-base-200 h-screen  flex justify-center items-center ">

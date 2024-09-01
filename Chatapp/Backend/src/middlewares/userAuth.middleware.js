@@ -11,8 +11,8 @@ export const isAuthenticated = async (req, res, next) => {
       return res.status(401).json({message:"Invalid token"});
   };
 
-   console.log("id ", req.id)
-   console.log("decode ", decode._id)
+  //  console.log("id ", req.id)
+  //  console.log("decode ", decode._id)
 
     req.id = decode._id;
 

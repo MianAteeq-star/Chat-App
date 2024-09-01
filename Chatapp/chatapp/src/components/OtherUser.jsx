@@ -4,7 +4,10 @@ import { setSelectedUser } from "../redux/userSlice";
 
 function OtherUser({ user }) {
   const dispatch = useDispatch();
-  const { selectedUser } = useSelector((store) => store.user);
+  const { selectedUser, onlineUsers } = useSelector((store) => store.user);
+  console.log(onlineUsers)
+  const isOnline = onlineUsers?.includes(user?._id);
+  console.log(isOnline)
   const handleSelectedUser = (user) => {
     console.log(user);
     dispatch(setSelectedUser(user));
@@ -17,7 +20,7 @@ function OtherUser({ user }) {
           selectedUser?._id === user?._id ? "bg-zinc-400" : ""
         } flex items-center rounded-md hover:bg-zinc-400 shadow-lg p-2 overflow-hidden`}
       >
-        <div className="avatar online ">
+           <div className={`avatar ${isOnline ? 'online' : '' }`}>
           <div className="w-16 rounded-full">
             <img src={user?.profilePhoto} />
           </div>
