@@ -1,10 +1,12 @@
+
+
 {
   "version": 2,
   "builds": [
     {
-      "src": "chatapp/package.json",
+      "src": "chattapp/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "chatapp/build" }
+      "config": { "distDir": "chattapp/build" }
     },
     {
       "src": "Backend/server.js",
