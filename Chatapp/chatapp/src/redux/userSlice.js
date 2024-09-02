@@ -27,4 +27,12 @@ const userSlice = createSlice({
 
 export const { setAuthUser, setGetOtherUser, setSelectedUser,setOnlineUsers } =
   userSlice.actions;
+
+
+  export const loadAuthUserFromLocalStorage = () => (dispatch) => {
+    const storedUser = localStorage.getItem("authUser");
+    if (storedUser) {
+      dispatch(setAuthUser(JSON.parse(storedUser)));
+    }
+  };
 export default userSlice.reducer;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home";
@@ -6,13 +6,20 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
-import { setAuthUser, setOnlineUsers } from "./redux/userSlice";
+import { loadAuthUserFromLocalStorage, setAuthUser, setOnlineUsers } from "./redux/userSlice";
 import { setSocket, setConnectionStatus } from "./redux/socketSlice";
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <ProtectedRoutes>
+        <Home />
+      </ProtectedRoutes>
+    ),
+    
+   
   },
   {
     path: "/login",
@@ -28,14 +35,14 @@ function App() {
   const { authUser } = useSelector((state) => state.user);
   const { socket, isConnected } = useSelector((state) => state.socket);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("authUser");
-    if (storedUser) {
-      dispatch(setAuthUser(JSON.parse(storedUser)));
-      console.log('User loaded from localStorage:', JSON.parse(storedUser));
-    }
+    dispatch(loadAuthUserFromLocalStorage());
+    setLoading(false);
   }, [dispatch]);
+
+  
 
   useEffect(() => {
     if (authUser?.user && !socket) {
@@ -80,6 +87,9 @@ function App() {
     console.log('Socket connection status:', isConnected);
   }, [isConnected]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="p-4 h-screen flex items-center justify-center">
       <RouterProvider router={router} />

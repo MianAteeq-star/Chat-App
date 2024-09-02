@@ -4,9 +4,7 @@ import { useSelector } from "react-redux";
 function UserMessage({ msg }) {
   const { authUser, selectedUser } = useSelector((store) => store.user)
 
-  // console.log("Message of prop : ",msg)
-  // console.log("selectedUser : ",selectedUser)
-  // console.log("authUser : ",authUser)
+  
   const scroll = useRef()
   useEffect(() => {
     scroll.current?.scrollIntoView({ behavior: "smooth" })
@@ -19,13 +17,15 @@ function UserMessage({ msg }) {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS chat bubble component"
-                src={`${msg?.senderId === authUser?.user?._id ? authUser?.user?.profilePhoto : selectedUser?.profilePhoto}`}
+                src={`${msg?.senderId === authUser?.user?._id  ?  authUser?.user?.profilePhoto : selectedUser?.profilePhoto}`}
               />
             </div>
           </div>
-          <div className={`chat-bubble ${msg?.senderId !== authUser?.user._id ? 'bg-gray-200 text-black' : ''} `}>{msg?.message}</div>
+          <div className={`chat-bubble ${msg?.senderId !== authUser?.user?._id ? 'bg-gray-200 text-black' : ''} `}>{msg?.message}</div>
           <div className="chat-footer">
-                <time className="text-xs opacity-50 text-white">{authUser?.user?._id  === msg?.senderId ?  authUser?.user?.username : selectedUser?.username}</time>
+                <time className="text-xs opacity-50 text-white">
+                  {msg?.createdAt && new Date(msg?.createdAt).toLocaleTimeString()}
+                </time>
             </div>
         </div>
 
