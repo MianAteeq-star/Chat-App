@@ -7,8 +7,9 @@ import connectDB from "./db/connectDB.js";
 import userRoutes from "./routes/user.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import "./socketio/soketio.js"
-// import path from "path"
-import path from "path";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 const app = express();
 
 app.use(cors({
@@ -17,7 +18,10 @@ app.use(cors({
 }));
 
 //deployment
-// const __dirname = path.resolve();
+
+// __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 //deployment
 
 app.use(express.json());
@@ -34,11 +38,21 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/messages", messageRoutes);
 
 //deployment
-app.get("/", (req, res) => {
-app.use(express.static(path.resolve(__dirname, "chatapp", "build")));
+// app.get("/", (req, res) => {
+// app.use(express.static(path.resolve(__dirname, "chatapp", "build")));
 
-res.sendFile(path.resolve(__dirname, "chatapp", "build", "index.html"));
-})
+// res.sendFile(path.resolve(__dirname, "chatapp", "build", "index.html"));
+// })
+
+
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../chatapp/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../chatapp/build', 'index.html'));
+});
+
 
 //deployment
 

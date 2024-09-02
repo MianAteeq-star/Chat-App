@@ -1,14 +1,17 @@
 {
-    "builds": [
-      {
-        "src": "./server.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/server.js"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "chatapp/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "chatapp/build" }
+    },
+    {
+      "src": "Backend/src/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/Backend/src/server.js" }
+  ]
 }
