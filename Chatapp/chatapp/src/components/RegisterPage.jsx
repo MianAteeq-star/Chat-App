@@ -17,7 +17,7 @@ function RegisterPage() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${window.location.origin}/api/v1/users/register`,
+        `/api/v1/users/register`,
         user
       );
       if (response && response.data.success) {

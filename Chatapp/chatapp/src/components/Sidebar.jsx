@@ -16,7 +16,7 @@ function Sidebar() {
   const dispatch = useDispatch()
   const handleLogout = async () => {
     try {
-      const res = await axios.get(`${window.location.origin}/api/v1/users/logout`);
+      const res = await axios.get(`/api/v1/users/logout`);
       console.log(res.data);
       toast.success(res.data.message);
       navigate("/login");

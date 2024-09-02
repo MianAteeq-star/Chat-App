@@ -43,7 +43,7 @@ function LoginPage() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${window.location.origin}/api/v1/users/login`,
+        `/api/v1/users/login`,
         user
       );
       if (response && response.data.success) {
