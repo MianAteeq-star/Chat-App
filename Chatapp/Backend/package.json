@@ -4,7 +4,9 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js",
+    "start" : "npm install && npm install --prefix chatapp && npm run build --prefix chatapp && npm run start --prefix chatapp",
+    "test" : "node src/server.js"
   },
   "keywords": [],
   "author": "Muhammad Attique",
@@ -21,6 +23,7 @@
     "mongoose": "^8.5.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.4",
+    "path": "^0.12.7",
     "socket.io": "^4.7.5"
   }
 }
