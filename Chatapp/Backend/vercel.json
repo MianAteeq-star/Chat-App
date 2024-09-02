@@ -7,11 +7,11 @@
       "config": { "distDir": "chatapp/build" }
     },
     {
-      "src": "Backend/src/server.js",
+      "src": "Backend/server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/Backend/src/server.js" }
+    { "src": "/(.*)", "dest": "/Backend/server.js" }
   ]
 }

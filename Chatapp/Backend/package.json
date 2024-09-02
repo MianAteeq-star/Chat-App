@@ -4,9 +4,9 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/server.js",
+    "dev": "nodemon -r dotenv/config --experimental-json-modules server.js",
     "start" : "npm install && npm install --prefix chatapp && npm run build --prefix chatapp && npm run start --prefix chatapp",
-    "test" : "node src/server.js"
+    "test" : "node server.js"
   },
   "keywords": [],
   "author": "Muhammad Attique",
